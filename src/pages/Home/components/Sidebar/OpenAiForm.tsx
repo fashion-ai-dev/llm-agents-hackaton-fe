@@ -7,6 +7,7 @@ import { FormGroup } from '@/components/FormGroup';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
+import { storageKeys } from '@/config/storageKeys';
 
 import { useChat } from '../../contexts/ChatContext';
 
@@ -19,7 +20,7 @@ type OpenAiFormData = z.infer<typeof openAiFormSchema>;
 export function OpenAiForm() {
   const [isEditable, setIsEditable] = useState(true);
 
-  const { openAiKey, handleOpenAiKey } = useChat();
+  const { handleOpenAiKey } = useChat();
 
   const {
     formState: { isSubmitting, errors },
@@ -37,13 +38,20 @@ export function OpenAiForm() {
 
   function onSubmit({ key }: OpenAiFormData) {
     handleOpenAiKey(key);
+    localStorage.setItem(storageKeys.openAiKey, key);
     setIsEditable(false);
     setValue('key', '************');
   }
 
   useEffect(() => {
-    console.log(openAiKey);
-  }, [openAiKey]);
+    const storage = localStorage.getItem(storageKeys.openAiKey);
+
+    if (storage) {
+      handleOpenAiKey(storage);
+      setIsEditable(false);
+      setValue('key', '************');
+    }
+  }, [handleOpenAiKey, setValue]);
 
   return (
     <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>

@@ -1,6 +1,7 @@
 import {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -45,9 +46,9 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
   const { isConnected, setIsConnected } = useStore((state) => state.socket);
 
-  function handleOpenAiKey(key: string) {
+  const handleOpenAiKey = useCallback((key: string) => {
     setOpenAiKey(key);
-  }
+  }, []);
 
   const {
     conversation,
