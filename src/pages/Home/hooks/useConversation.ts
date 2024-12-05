@@ -88,7 +88,7 @@ export function useConversation(
         image,
       });
     },
-    [socket, threadId],
+    [openAiKey, socket, threadId],
   );
 
   const handleCancelConversation = useCallback(() => {
