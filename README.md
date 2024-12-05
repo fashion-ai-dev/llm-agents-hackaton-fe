@@ -1,4 +1,4 @@
-# Copilot Project
+# Copilot Front-end
 
 Welcome to the Copilot Project! This application is designed to help you integrate powerful AI tools into your development workflow.
 
