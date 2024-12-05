@@ -37,6 +37,7 @@ export interface ConversationHistory {
 export function useConversation(
   socket: Socket,
   isConnected: boolean,
+  openAiKey: null | string,
   setIsLoading: Dispatch<SetStateAction<boolean>>,
 ) {
   const [conversation, setConversation] = useState<Conversation[]>([]);
@@ -79,6 +80,7 @@ export function useConversation(
       setIsChatting(true);
 
       socket.emit('conversation', {
+        open_ai_key: openAiKey,
         thread_id: threadId,
         message: {
           userInput: message,

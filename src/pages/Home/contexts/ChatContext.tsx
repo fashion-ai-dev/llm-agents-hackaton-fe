@@ -26,11 +26,13 @@ const socket = io(SOCKET_URL, {
 });
 
 export interface ChatContextValue {
+  openAiKey: null | string;
   conversation: Conversation[];
   logs: Log[];
   isConnected: boolean;
   isLoading: boolean;
   isChatting: boolean;
+  handleOpenAiKey: (key: string) => void;
   handleConversation: (dto: ConversationDto) => void;
   handleCancelConversation: () => void;
 }
@@ -38,16 +40,21 @@ export interface ChatContextValue {
 const ChatContext = createContext({} as ChatContextValue);
 
 export function ChatProvider({ children }: { children: ReactNode }) {
+  const [openAiKey, setOpenAiKey] = useState<null | string>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const { isConnected, setIsConnected } = useStore((state) => state.socket);
+
+  function handleOpenAiKey(key: string) {
+    setOpenAiKey(key);
+  }
 
   const {
     conversation,
     isChatting,
     handleConversation,
     handleCancelConversation,
-  } = useConversation(socket, isConnected, setIsLoading);
+  } = useConversation(socket, isConnected, openAiKey, setIsLoading);
 
   const { logs } = useLogs(socket, isConnected);
 
@@ -114,11 +121,13 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value: ChatContextValue = {
+    openAiKey,
     conversation,
     logs,
     isConnected,
     isLoading,
     isChatting,
+    handleOpenAiKey,
     handleConversation,
     handleCancelConversation,
   };
