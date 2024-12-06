@@ -2,15 +2,14 @@ import { ThreadHubCard } from './ThreadHubCard';
 
 const threadHubCardData = [
   {
-    input: 'Gere um CSV com os produtos “Best” do Ecommerce.',
+    input: 'What are the top 5 best-selling products of this year?',
+  },
+  {
+    input: 'Generate a graph with daily sales for September.',
   },
   {
     input:
-      'Gere um gráfico com as vendas dos 5 produtos de maior venda nas lojas físicas.',
-  },
-  {
-    input:
-      'Quais foram as 10 linhas mix de maior crescimento de vendas entre a coleçao de inverno passado e a deste ano?',
+      'Create a CSV file with top 100 customer by spending over the past 6 months.',
   },
 ];
 

@@ -95,7 +95,7 @@ export function ChatForm() {
       </form>
 
       <p className="mt-5 text-center text-xs text-[#A5A5A5]">
-        Verifique toda informação importante. Copilot pode cometer erros.
+        Copilot can make mistakes. Check important info.
       </p>
     </div>
   );
