@@ -74,7 +74,7 @@ export function ChatForm() {
         </label>
 
         <input
-          placeholder="Digite sua mensagem"
+          placeholder="Message Copilot"
           className="h-full w-full rounded-[99px] bg-[#F6F6F6] pl-[35px] pr-[55px] text-sm font-light outline-none"
           {...register('message')}
         />
