@@ -28,7 +28,7 @@ export interface Log {
   outputToken: number;
   planning: {
     [key: string]: string;
-  };
+  }[];
   promptToken: number;
   sessionId: string;
   timestamp: string;

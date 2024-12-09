@@ -13,7 +13,7 @@ import {
   SquareTerminal,
   User,
 } from 'lucide-react';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import { AssistantIcon } from '@/components/AssistantIcon';
 import { CodeSnippet } from '@/components/CodeSnippet';
@@ -136,18 +136,20 @@ export function AgentCard({ log, color }: AgentCardProps) {
                 icon={<ChartGantt />}
                 content={
                   <div className="space-y-2">
-                    {Object.entries(log?.planning ?? {}).map(
-                      (output, index) => (
-                        <p key={index}>
-                          <strong className="font-semibold">
-                            {output[0].replace('_', '')}:
-                          </strong>{' '}
-                          {typeof output[1] === 'object'
-                            ? JSON.stringify(output[1])
-                            : output[1]}
-                        </p>
-                      ),
-                    )}
+                    {log?.planning.map((item, itemIndex) => (
+                      <Fragment key={itemIndex}>
+                        {Object.entries(item ?? {}).map((output, index) => (
+                          <p key={index}>
+                            <strong className="font-semibold">
+                              {output[0].replace('_', ' ')}:
+                            </strong>{' '}
+                            {typeof output[1] === 'object'
+                              ? JSON.stringify(output[1])
+                              : output[1]}
+                          </p>
+                        ))}
+                      </Fragment>
+                    ))}
                   </div>
                 }
               />
