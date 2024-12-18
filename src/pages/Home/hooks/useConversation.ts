@@ -8,6 +8,7 @@ import {
 } from 'react';
 import { Socket } from 'socket.io-client';
 
+import { env } from '@/config/env';
 import { useThreadParams } from '@/hooks/useThreadParams';
 import { useStore } from '@/store';
 
@@ -80,7 +81,8 @@ export function useConversation(
       setIsChatting(true);
 
       socket.emit('conversation', {
-        open_ai_key: openAiKey,
+        // open_ai_key: openAiKey,
+        open_ai_key: env.OPEN_AI_KEY,
         thread_id: threadId,
         message: {
           userInput: message,
@@ -88,7 +90,7 @@ export function useConversation(
         image,
       });
     },
-    [openAiKey, socket, threadId],
+    [socket, threadId],
   );
 
   const handleCancelConversation = useCallback(() => {
